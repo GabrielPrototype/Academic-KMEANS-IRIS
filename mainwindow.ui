@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>792</width>
+    <height>510</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QFrame" name="frame_2">
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <property name="lineWidth">
+       <number>0</number>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item alignment="Qt::AlignLeft">
+        <widget class="QFrame" name="horizontalFrame">
+         <layout class="QGridLayout" name="gridLayout_2">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QPushButton" name="btOpen">
+            <property name="maximumSize">
+             <size>
+              <width>200</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Abrir fonte de dados</string>
+            </property>
+            <property name="icon">
+             <iconset resource="res/icon_res.qrc">
+              <normaloff>:/icons/32/icons/Adwaita/32x32/actions/document-open.png</normaloff>:/icons/32/icons/Adwaita/32x32/actions/document-open.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item alignment="Qt::AlignRight">
+        <widget class="QFrame" name="frame">
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="1">
+           <widget class="QSpinBox" name="sbxCentroids">
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>50</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;O Valor padrão é 4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="value">
+             <number>4</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QPushButton" name="btExec">
+            <property name="maximumSize">
+             <size>
+              <width>200</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Executar K-Means</string>
+            </property>
+            <property name="icon">
+             <iconset resource="res/icon_res.qrc">
+              <normaloff>:/icons/32/icons/Adwaita/32x32/actions/media-playback-start.png</normaloff>:/icons/32/icons/Adwaita/32x32/actions/media-playback-start.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="maximumSize">
+             <size>
+              <width>160</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Numero de Centróides</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTabWidget" name="tabs">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="tabGeralGraph">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <attribute name="title">
+        <string>Geral</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="4" column="3">
+         <widget class="QGraphicsView" name="grvw_2x2">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="lbLin_SepalLength">
+          <property name="text">
+           <string>Sepal Length</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QGraphicsView" name="grvw_0x0">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QGraphicsView" name="grvw_1x0"/>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="lbLin_SepalWidth">
+          <property name="text">
+           <string>Sepal Width</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="5">
+         <widget class="QGraphicsView" name="grvw_3x0"/>
+        </item>
+        <item row="3" column="1">
+         <widget class="QGraphicsView" name="grvw_0x1"/>
+        </item>
+        <item row="3" column="2">
+         <widget class="QGraphicsView" name="grvw_1x1">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="3">
+         <widget class="QGraphicsView" name="grvw_2x1"/>
+        </item>
+        <item row="3" column="5">
+         <widget class="QGraphicsView" name="grvw_3x1"/>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="lbLin_PetalLength_2">
+          <property name="text">
+           <string>Petal Length</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QGraphicsView" name="grvw_0x2"/>
+        </item>
+        <item row="4" column="2">
+         <widget class="QGraphicsView" name="grvw_1x2"/>
+        </item>
+        <item row="4" column="5">
+         <widget class="QGraphicsView" name="grvw_3x2"/>
+        </item>
+        <item row="5" column="0">
+         <widget class="QLabel" name="lbLin_PetalWidth">
+          <property name="text">
+           <string>Petal Width</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="QGraphicsView" name="grvw_0x3"/>
+        </item>
+        <item row="5" column="2">
+         <widget class="QGraphicsView" name="grvw_1x3"/>
+        </item>
+        <item row="5" column="3">
+         <widget class="QGraphicsView" name="grvw_2x3"/>
+        </item>
+        <item row="5" column="5">
+         <widget class="QGraphicsView" name="grvw_3x3">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="QLabel" name="lbCol_SepalLength">
+          <property name="text">
+           <string>Sepal Length</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="2">
+         <widget class="QLabel" name="lbCol_SepalWidth">
+          <property name="text">
+           <string>Sepal Width</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="3">
+         <widget class="QLabel" name="lbCol_PetalLength">
+          <property name="text">
+           <string>Petal Length</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="5">
+         <widget class="QLabel" name="lbCol_PetalWidth">
+          <property name="text">
+           <string>Petal Width</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QGraphicsView" name="grvw_2x0"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Detalhado</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item alignment="Qt::AlignLeft">
+         <widget class="QFrame" name="frame">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>50</height>
+           </size>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <property name="spacing">
+            <number>10</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <widget class="QLabel" name="label_3">
+               <property name="text">
+                <string>Eixo X</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBox_2"/>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>Eixo Y</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBox"/>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btUpdateGraph">
+             <property name="text">
+              <string>Atualizar</string>
+             </property>
+             <property name="icon">
+              <iconset theme="view-refresh"/>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QFrame" name="frame_3">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="0" column="1">
+            <widget class="QGraphicsView" name="gvMainGraph"/>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="lbY">
+             <property name="text">
+              <string>Y</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="lbX">
+             <property name="text">
+              <string>X</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>792</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionOpen">
+   <property name="icon">
+    <iconset resource="res/icon_res.qrc">
+     <normaloff>:/icons/32/icons/Adwaita/32x32/actions/document-open.png</normaloff>:/icons/32/icons/Adwaita/32x32/actions/document-open.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionGo">
+   <property name="icon">
+    <iconset theme="media-playback-start" resource="res/icon_res.qrc">
+     <normaloff>:/icons/32/icons/Adwaita/32x32/actions/media-playback-start.png</normaloff>:/icons/32/icons/Adwaita/32x32/actions/media-playback-start.png</iconset>
+   </property>
+   <property name="text">
+    <string>Go</string>
+   </property>
+   <property name="toolTip">
+    <string>Start K-Means</string>
+   </property>
+  </action>
+  <action name="actionUpdateGraph">
+   <property name="icon">
+    <iconset theme="view-refresh" resource="res/icon_res.qrc">
+     <normaloff>:/icons/32/icons/Adwaita/32x32/actions/view-refresh.png</normaloff>:/icons/32/icons/Adwaita/32x32/actions/view-refresh.png</iconset>
+   </property>
+   <property name="text">
+    <string>UpdateGraph</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="res/icon_res.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>btOpen</sender>
+   <signal>clicked()</signal>
+   <receiver>actionOpen</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>89</x>
+     <y>56</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btUpdateGraph</sender>
+   <signal>clicked()</signal>
+   <receiver>actionUpdateGraph</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>336</x>
+     <y>142</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

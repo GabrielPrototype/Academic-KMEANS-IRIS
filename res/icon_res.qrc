@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/icons/32">
+        <file>icons/Adwaita/32x32/actions/document-open.png</file>
+        <file>icons/Adwaita/32x32/actions/media-playback-start.png</file>
+        <file>icons/Adwaita/32x32/actions/view-refresh.png</file>
+    </qresource>
+</RCC>
