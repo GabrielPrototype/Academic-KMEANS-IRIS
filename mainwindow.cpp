@@ -32,10 +32,15 @@ void MainWindow::on_actionOpen_triggered()
         return;
     }
     if(!test.loadData(file)){
-
-
+        QMessageBox::information(this, tr("Falha ao carregar arquivo"),
+                                 "Houve um problema ao carregar o arquivo");
+        return;
     }
-    //updateInterface(NavigationMode);
+
+    this->ui->btExec->setEnabled(true);
+    QMessageBox::information(this, tr("Alerta"),
+                             "O arquivo foi carregado com sucesso");
+    return;
 }
 
 void MainWindow::plotAll(IrisData& data){

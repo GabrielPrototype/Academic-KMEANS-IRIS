@@ -26,11 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    irisdata.cpp
+    irisdata.cpp \
+    irisdataitem.cpp
 
 HEADERS += \
         mainwindow.h \
-    irisdata.h
+    irisdata.h \
+    irisdataitem.h
 
 FORMS += \
         mainwindow.ui

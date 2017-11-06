@@ -72,8 +72,8 @@
              <string>Abrir fonte de dados</string>
             </property>
             <property name="icon">
-             <iconset resource="res/icon_res.qrc">
-              <normaloff>:/icons/32/icons/Adwaita/32x32/actions/document-open.png</normaloff>:/icons/32/icons/Adwaita/32x32/actions/document-open.png</iconset>
+             <iconset theme="document-open">
+              <normaloff>.</normaloff>.</iconset>
             </property>
            </widget>
           </item>
@@ -100,6 +100,12 @@
             <property name="toolTip">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;O Valor padrão é 4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
+            <property name="minimum">
+             <number>2</number>
+            </property>
+            <property name="maximum">
+             <number>6</number>
+            </property>
             <property name="value">
              <number>4</number>
             </property>
@@ -107,6 +113,9 @@
           </item>
           <item row="0" column="2">
            <widget class="QPushButton" name="btExec">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="maximumSize">
              <size>
               <width>200</width>
@@ -144,14 +153,14 @@
     <item>
      <widget class="QTabWidget" name="tabs">
       <property name="enabled">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabGeralGraph">
        <property name="enabled">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <attribute name="title">
         <string>Geral</string>
@@ -327,7 +336,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_2">
+      <widget class="QWidget" name="tabDetailGraph">
        <attribute name="title">
         <string>Detalhado</string>
        </attribute>
@@ -390,7 +399,8 @@
               <string>Atualizar</string>
              </property>
              <property name="icon">
-              <iconset theme="view-refresh"/>
+              <iconset theme="view-refresh">
+               <normaloff>.</normaloff>.</iconset>
              </property>
             </widget>
            </item>
@@ -451,11 +461,14 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionOpen">
    <property name="icon">
-    <iconset resource="res/icon_res.qrc">
+    <iconset theme="document-open" resource="res/icon_res.qrc">
      <normaloff>:/icons/32/icons/Adwaita/32x32/actions/document-open.png</normaloff>:/icons/32/icons/Adwaita/32x32/actions/document-open.png</iconset>
    </property>
    <property name="text">
     <string>Open</string>
+   </property>
+   <property name="shortcut">
+    <string>F2</string>
    </property>
   </action>
   <action name="actionGo">
@@ -477,6 +490,9 @@
    </property>
    <property name="text">
     <string>UpdateGraph</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
    </property>
   </action>
  </widget>
@@ -510,6 +526,22 @@
     <hint type="sourcelabel">
      <x>336</x>
      <y>142</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btExec</sender>
+   <signal>clicked()</signal>
+   <receiver>actionGo</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>700</x>
+     <y>56</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
