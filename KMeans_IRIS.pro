@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     irisdata.cpp \
-    irisdataitem.cpp
+    irisdataitem.cpp \
+    kcentroid.cpp
 
 HEADERS += \
         mainwindow.h \
     irisdata.h \
-    irisdataitem.h
+    irisdataitem.h \
+    kcentroid.h
 
 FORMS += \
         mainwindow.ui

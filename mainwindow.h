@@ -6,7 +6,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <irisdata.h>
-
+#include <kcentroid.h>
 
 namespace Ui {
 class MainWindow;
@@ -27,7 +27,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    IrisData test;
+    IrisData irisdata;
 
     void plotAll(IrisData&);
 

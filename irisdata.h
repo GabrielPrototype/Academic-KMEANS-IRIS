@@ -10,7 +10,7 @@ public:
     IrisData();
     std::int16_t loadData(QFile & file);
 
-    std::vector<IrisDataItem> getObjItem() const;
+    std::vector<IrisDataItem> getIrisVector() const;
 
     void replaceItem(const int32_t pos, IrisDataItem &value);
 

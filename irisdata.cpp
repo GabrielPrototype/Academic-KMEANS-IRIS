@@ -44,7 +44,7 @@ IrisDataItem IrisData::getItem(std::int32_t pos)
     irisItem[pos];
 }
 
-std::vector<IrisDataItem> IrisData::getObjItem() const
+std::vector<IrisDataItem> IrisData::getIrisVector() const
 {
     return irisItem;
 }

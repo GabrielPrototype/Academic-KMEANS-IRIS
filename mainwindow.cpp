@@ -31,7 +31,7 @@ void MainWindow::on_actionOpen_triggered()
                                  file.errorString());
         return;
     }
-    if(!test.loadData(file)){
+    if(!irisdata.loadData(file)){
         QMessageBox::information(this, tr("Falha ao carregar arquivo"),
                                  "Houve um problema ao carregar o arquivo");
         return;
@@ -48,8 +48,42 @@ void MainWindow::plotAll(IrisData& data){
 
 }
 
-
 void MainWindow::on_actionGo_triggered()
 {
+    int32_t nCentroids = this->ui->sbxCentroids->value();
+
+    std::vector<KCentroid> centroids;
+
+
+
+
+    if (!(nCentroids >= 2)) {
+        QMessageBox::information(this, tr("Numero de Centroides fora do limite"),
+                                 "numero de centroides fora do limite");
+        return;
+    }
+
+    //sorteia centroides
+    for (int i = 0; i < nCentroids; i++) {
+
+        //dinamicamente adicionar centroids no std::vector.
+
+        KCentroid *cntr = new KCentroid(i+1);
+        centroids.push_back(*cntr);
+        delete cntr;
+    }
+
+    //calcula distancias e define a qual centroide o ponto pertence
+    foreach (IrisDataItem unit, this->irisdata.getIrisVector()) {
+
+        std::int16_t nearestCentroid = -1;
+
+        foreach (KCentroid centunit, centroids) {
+
+        }
+    }
+
+
+
 
 }
