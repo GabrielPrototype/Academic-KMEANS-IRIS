@@ -52,38 +52,23 @@ void MainWindow::on_actionGo_triggered()
 {
     int32_t nCentroids = this->ui->sbxCentroids->value();
 
-    std::vector<KCentroid> centroids;
-
-
-
-
     if (!(nCentroids >= 2)) {
         QMessageBox::information(this, tr("Numero de Centroides fora do limite"),
                                  "numero de centroides fora do limite");
         return;
     }
 
-    //sorteia centroides
-    for (int i = 0; i < nCentroids; i++) {
-
-        //dinamicamente adicionar centroids no std::vector.
-
-        KCentroid *cntr = new KCentroid(i+1);
-        centroids.push_back(*cntr);
-        delete cntr;
-    }
+    //sorteia os centroids
+    KCentroid::newRandomCentroids(vctrCentroids, nCentroids);
 
     //calcula distancias e define a qual centroide o ponto pertence
-    foreach (IrisDataItem unit, this->irisdata.getIrisVector()) {
+    KCentroid::clusterizeData(vctrCentroids,irisdata);
 
-        std::int16_t nearestCentroid = -1;
+    std::vector<KCentroid> tmpCentroids;
+    tmpCentroids = vctrCentroids;
 
-        foreach (KCentroid centunit, centroids) {
-
-        }
+    foreach (KCentroid item, vctrCentroids) {
+        item.reCalcCentroid(irisdata);
     }
-
-
-
-
+    return;
 }

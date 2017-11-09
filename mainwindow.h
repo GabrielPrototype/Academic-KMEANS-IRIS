@@ -28,7 +28,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     IrisData irisdata;
-
+    std::vector<KCentroid> vctrCentroids;
     void plotAll(IrisData&);
 
 
