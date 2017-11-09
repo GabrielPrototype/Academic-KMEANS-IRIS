@@ -3,6 +3,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <irisdataitem.h>
+#include <cmath>
 
 class IrisData
 {
@@ -20,6 +21,7 @@ public:
 
     IrisDataItem getItem(std::int32_t pos);
 
+    static double euclidianDistance(IrisDataItem iris1, IrisDataItem iris2);
 
 private:
     std::vector<IrisDataItem> irisItem;
