@@ -39,9 +39,18 @@ std::int16_t IrisData::loadData(QFile &file){
     }
 }
 
-IrisDataItem IrisData::getItem(std::int32_t pos)
+IrisDataItem IrisData::getItem(std::int32_t id)
 {
-    irisItem[pos];
+    std::int32_t i;
+
+
+    int debug = irisVector.size();
+
+    for( i= 0; i < irisVector.size() && irisVector[i].getId() != id; i++);
+
+    if(i < irisVector.size())
+        return irisVector[i];
+
 }
 
 double IrisData::euclidianDistance(IrisDataItem iris1, IrisDataItem iris2)
@@ -63,22 +72,22 @@ double IrisData::euclidianDistance(IrisDataItem iris1, IrisDataItem iris2)
 
 std::vector<IrisDataItem> IrisData::getIrisVector() const
 {
-    return irisItem;
+    return irisVector;
 }
 
 void IrisData::replaceItem(int32_t pos, IrisDataItem &value)
 {
-    if(pos < irisItem.size() && pos >= 0)
-        irisItem.insert(irisItem.begin(),value);
+    if(pos < irisVector.size() && pos >= 0)
+        irisVector.insert(irisVector.begin(),value);
 }
 
 void IrisData::addItem(IrisDataItem &value){
 
-    irisItem.push_back(value);
+    irisVector.push_back(value);
 
 }
 
 void IrisData::replaceList(const std::vector<IrisDataItem> &value)
 {
-    irisItem = value;
+    irisVector = value;
 }

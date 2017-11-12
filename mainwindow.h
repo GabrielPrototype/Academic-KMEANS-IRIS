@@ -5,8 +5,16 @@
 #include <QString>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QTime>
+#include <QtCharts/QChart>
+#include <QtCharts/QChartView>
+#include <QScatterSeries>
+
+
 #include <irisdata.h>
 #include <kcentroid.h>
+
+using namespace QtCharts;
 
 namespace Ui {
 class MainWindow;
@@ -29,7 +37,8 @@ private:
     Ui::MainWindow *ui;
     IrisData irisdata;
     std::vector<KCentroid> vctrCentroids;
-    void plotAll(IrisData&);
+    QChartView *chartViewMatrix[4][4];
+    void plotAll();
 
 
 };

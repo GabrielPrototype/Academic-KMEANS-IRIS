@@ -72,8 +72,8 @@
              <string>Abrir fonte de dados</string>
             </property>
             <property name="icon">
-             <iconset theme="document-open">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset resource="res/icon_res.qrc">
+              <normaloff>:/icons/32/icons/Adwaita/32x32/actions/document-open.png</normaloff>:/icons/32/icons/Adwaita/32x32/actions/document-open.png</iconset>
             </property>
            </widget>
           </item>
@@ -107,7 +107,7 @@
              <number>6</number>
             </property>
             <property name="value">
-             <number>4</number>
+             <number>3</number>
             </property>
            </widget>
           </item>
@@ -153,190 +153,157 @@
     <item>
      <widget class="QTabWidget" name="tabs">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
       <widget class="QWidget" name="tabGeralGraph">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <attribute name="title">
         <string>Geral</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="4" column="3">
-         <widget class="QGraphicsView" name="grvw_2x2">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="0">
-         <widget class="QLabel" name="lbLin_SepalLength">
-          <property name="text">
-           <string>Sepal Length</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-          <property name="wordWrap">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QGraphicsView" name="grvw_0x0">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <widget class="QGraphicsView" name="grvw_1x0"/>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="lbLin_SepalWidth">
-          <property name="text">
-           <string>Sepal Width</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-          <property name="wordWrap">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="5">
-         <widget class="QGraphicsView" name="grvw_3x0"/>
-        </item>
-        <item row="3" column="1">
-         <widget class="QGraphicsView" name="grvw_0x1"/>
-        </item>
-        <item row="3" column="2">
-         <widget class="QGraphicsView" name="grvw_1x1">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="3">
-         <widget class="QGraphicsView" name="grvw_2x1"/>
-        </item>
-        <item row="3" column="5">
-         <widget class="QGraphicsView" name="grvw_3x1"/>
-        </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="lbLin_PetalLength_2">
-          <property name="text">
-           <string>Petal Length</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-          <property name="wordWrap">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="QGraphicsView" name="grvw_0x2"/>
-        </item>
-        <item row="4" column="2">
-         <widget class="QGraphicsView" name="grvw_1x2"/>
-        </item>
-        <item row="4" column="5">
-         <widget class="QGraphicsView" name="grvw_3x2"/>
-        </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="lbLin_PetalWidth">
-          <property name="text">
-           <string>Petal Width</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-          <property name="wordWrap">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="1">
-         <widget class="QGraphicsView" name="grvw_0x3"/>
-        </item>
-        <item row="5" column="2">
-         <widget class="QGraphicsView" name="grvw_1x3"/>
-        </item>
-        <item row="5" column="3">
-         <widget class="QGraphicsView" name="grvw_2x3"/>
-        </item>
-        <item row="5" column="5">
-         <widget class="QGraphicsView" name="grvw_3x3">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1">
-         <widget class="QLabel" name="lbCol_SepalLength">
-          <property name="text">
-           <string>Sepal Length</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-          <property name="wordWrap">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="2">
-         <widget class="QLabel" name="lbCol_SepalWidth">
-          <property name="text">
-           <string>Sepal Width</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-          <property name="wordWrap">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="3">
-         <widget class="QLabel" name="lbCol_PetalLength">
-          <property name="text">
-           <string>Petal Length</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-          <property name="wordWrap">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="5">
-         <widget class="QLabel" name="lbCol_PetalWidth">
-          <property name="text">
-           <string>Petal Width</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-          <property name="wordWrap">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="3">
-         <widget class="QGraphicsView" name="grvw_2x0"/>
+         <layout class="QGridLayout" name="gridGeralGraph">
+          <item row="4" column="1">
+           <widget class="QLabel" name="lbCol_SepalLength">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>Sepal Length</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QLabel" name="lbCol_SepalWidth">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>Sepal Width</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="4">
+           <widget class="QLabel" name="lbCol_PetalWidth">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>Petal Width</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="lbLin_PetalLength_2">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>Petal Length</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="lbLin_PetalWidth">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>Petal Width</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="lbLin_SepalLength">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>Sepal Length</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="lbLin_SepalWidth">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>Sepal Width</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="3">
+           <widget class="QLabel" name="lbCol_PetalLength">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>Petal Length</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tabDetailGraph">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <attribute name="title">
         <string>Detalhado</string>
        </attribute>
@@ -399,8 +366,8 @@
               <string>Atualizar</string>
              </property>
              <property name="icon">
-              <iconset theme="view-refresh">
-               <normaloff>.</normaloff>.</iconset>
+              <iconset resource="res/icon_res.qrc">
+               <normaloff>:/icons/32/icons/Adwaita/32x32/actions/view-refresh.png</normaloff>:/icons/32/icons/Adwaita/32x32/actions/view-refresh.png</iconset>
              </property>
             </widget>
            </item>
@@ -416,11 +383,14 @@
            <enum>QFrame::Raised</enum>
           </property>
           <layout class="QGridLayout" name="gridLayout_4">
-           <item row="0" column="1">
-            <widget class="QGraphicsView" name="gvMainGraph"/>
-           </item>
            <item row="0" column="0">
             <widget class="QLabel" name="lbY">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>20</height>
+              </size>
+             </property>
              <property name="text">
               <string>Y</string>
              </property>
@@ -431,6 +401,12 @@
            </item>
            <item row="1" column="1">
             <widget class="QLabel" name="lbX">
+             <property name="maximumSize">
+              <size>
+               <width>110</width>
+               <height>20</height>
+              </size>
+             </property>
              <property name="text">
               <string>X</string>
              </property>

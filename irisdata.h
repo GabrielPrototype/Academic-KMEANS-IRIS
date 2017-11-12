@@ -19,12 +19,12 @@ public:
 
     void addItem(IrisDataItem &value);
 
-    IrisDataItem getItem(std::int32_t pos);
+    IrisDataItem getItem(std::int32_t id);
 
     static double euclidianDistance(IrisDataItem iris1, IrisDataItem iris2);
 
 private:
-    std::vector<IrisDataItem> irisItem;
+    std::vector<IrisDataItem> irisVector;
 };
 
 #endif // IRISDATA_H

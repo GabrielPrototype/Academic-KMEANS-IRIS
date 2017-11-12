@@ -9,14 +9,17 @@ KCentroid::KCentroid()
 KCentroid::KCentroid(std::int16_t id)
 {
 
+
     // sorteia a posição do centroid.
     this->cntrdPoint.setId(id);
-    this->cntrdPoint.setSepalLengthCm(((float)qrand() / (float)RAND_MAX) * 9);
-    this->cntrdPoint.setSepalWidthCm(((float)qrand() / (float)RAND_MAX) * 6);
-    this->cntrdPoint.setPetalLengthCm(((float)qrand() / (float)RAND_MAX) * 8);
-    this->cntrdPoint.setPetalWidthCm(((float)qrand() / (float)RAND_MAX) * 4);
+    this->cntrdPoint.setSepalLengthCm(randomDouble(5, 7));
+    this->cntrdPoint.setSepalWidthCm(randomDouble(2.5, 3));
+    this->cntrdPoint.setPetalLengthCm(randomDouble(2, 5.5));
+    this->cntrdPoint.setPetalWidthCm(randomDouble(0.5, 2.2));
     this->cntrdPoint.setSpecies("Centroid_" + QString::number(id));
 }
+
+
 
 
 std::int16_t KCentroid::reCalcCentroid(IrisData &irisData)
@@ -34,21 +37,28 @@ std::int16_t KCentroid::reCalcCentroid(IrisData &irisData)
     numItens = clusterIndex.size();
 
     foreach (std::int64_t item, clusterIndex) {
-        m1 += irisData.getIrisVector()[item].getPetalLengthCm();
-        m2 += irisData.getIrisVector()[item].getPetalWidthCm();
-        m3 += irisData.getIrisVector()[item].getSepalLengthCm();
-        m4 += irisData.getIrisVector()[item].getSepalWidthCm();
+        m1 += irisData.getItem(item).getPetalLengthCm();
+        m2 += irisData.getItem(item).getPetalWidthCm();
+        m3 += irisData.getItem(item).getSepalLengthCm();
+        m4 += irisData.getItem(item).getSepalWidthCm();
     }
 
     this->cntrdPoint.setPetalLengthCm(m1/numItens);
     this->cntrdPoint.setPetalWidthCm(m2/numItens);
     this->cntrdPoint.setSepalLengthCm(m3/numItens);
     this->cntrdPoint.setSepalWidthCm(m4/numItens);
+
+    return EXIT_SUCCESS;
 }
 
 void KCentroid::addToClusterIndex(int64_t id)
 {
     clusterIndex.push_back(id);
+}
+
+void KCentroid::clearClusterIndex()
+{
+    clusterIndex.clear();
 }
 
 std::vector<std::int64_t> KCentroid::getClusterIndex() const
@@ -84,17 +94,21 @@ std::int16_t KCentroid::clusterizeData(std::vector<KCentroid> &vctrCentroids, Ir
     double nrstDistance;
     double tmpDist;
 
+    for (int i = 0; i < vctrCentroids.size(); i++) {
+        vctrCentroids[i].clearClusterIndex();
+    }
+
     foreach (IrisDataItem point, irisData.getIrisVector()) {
 
         nrstCentroidIndex = -1;
-        nrstDistance = NULL;
+        nrstDistance = -1;
         tmpDist = 0;
         index = 0;
 
         foreach (KCentroid centroid, vctrCentroids) {
             tmpDist = IrisData::euclidianDistance(point, centroid.getCntrdPoint());
 
-            if(nrstDistance == NULL || nrstDistance > tmpDist){
+            if(nrstDistance == -1 || nrstDistance > tmpDist){
                 nrstDistance = tmpDist;
                 nrstCentroidIndex = index;
             }
@@ -105,6 +119,25 @@ std::int16_t KCentroid::clusterizeData(std::vector<KCentroid> &vctrCentroids, Ir
     }
 
     return true;
+}
+
+bool KCentroid::compareCentroidsPos(KCentroid a, KCentroid b)
+{
+    if(a.getCntrdPoint().getPetalLengthCm() != b.getCntrdPoint().getPetalLengthCm())
+        return false;
+    if(a.getCntrdPoint().getPetalWidthCm() != b.getCntrdPoint().getPetalWidthCm())
+        return false;
+    if(a.getCntrdPoint().getSepalLengthCm() != b.getCntrdPoint().getSepalLengthCm())
+        return false;
+    if(a.getCntrdPoint().getSepalWidthCm() != b.getCntrdPoint().getSepalWidthCm())
+        return false;
+
+    return true;
+}
+
+double KCentroid::randomDouble(double min, double max)
+{
+    return  (max - min) * ((((float) qrand()) / (float) RAND_MAX)) + min ;
 }
 
 

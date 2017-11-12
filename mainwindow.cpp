@@ -3,11 +3,56 @@
 
 
 
+
+
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->tabs->setEnabled(false);
+
+
+
+    chartViewMatrix[0][1] = new QChartView();
+    chartViewMatrix[0][2] = new QChartView();
+    chartViewMatrix[0][3] = new QChartView();
+
+    chartViewMatrix[1][0] = new QChartView();
+
+    chartViewMatrix[1][2] = new QChartView();
+    chartViewMatrix[1][3] = new QChartView();
+
+    chartViewMatrix[2][0] = new QChartView();
+    chartViewMatrix[2][1] = new QChartView();
+
+    chartViewMatrix[2][3] = new QChartView();
+
+    chartViewMatrix[3][0] = new QChartView();
+    chartViewMatrix[3][1] = new QChartView();
+    chartViewMatrix[3][2] = new QChartView();
+
+
+    ui->gridGeralGraph->addWidget(chartViewMatrix[0][1], 0, 3);
+    ui->gridGeralGraph->addWidget(chartViewMatrix[0][2], 0, 4);
+    ui->gridGeralGraph->addWidget(chartViewMatrix[0][3], 0, 5);
+
+    ui->gridGeralGraph->addWidget(chartViewMatrix[1][0], 1, 2);
+
+    ui->gridGeralGraph->addWidget(chartViewMatrix[1][2], 1, 4);
+    ui->gridGeralGraph->addWidget(chartViewMatrix[1][3], 1, 5);
+
+    ui->gridGeralGraph->addWidget(chartViewMatrix[2][0], 2, 2);
+    ui->gridGeralGraph->addWidget(chartViewMatrix[2][1], 2, 3);
+
+    ui->gridGeralGraph->addWidget(chartViewMatrix[2][3], 2, 5);
+
+    ui->gridGeralGraph->addWidget(chartViewMatrix[3][0], 3, 2);
+    ui->gridGeralGraph->addWidget(chartViewMatrix[3][1], 3, 3);
+    ui->gridGeralGraph->addWidget(chartViewMatrix[3][2], 3, 4);
+
 }
 
 MainWindow::~MainWindow()
@@ -43,14 +88,49 @@ void MainWindow::on_actionOpen_triggered()
     return;
 }
 
-void MainWindow::plotAll(IrisData& data){
+void MainWindow::plotAll(){
+
+    QScatterSeries *series0 = new QScatterSeries();
+    series0->setName("scatter1");
+    series0->setMarkerShape(QScatterSeries::MarkerShapeCircle);
+    series0->setMarkerSize(2.0);
+
+    series0->append(0, 6);
+    series0->append(2, 4);
+    series0->append(3, 8);
+    series0->append(7, 4);
+    series0->append(10, 5);
+
+
+//    QChart *exChart = new QChart();
+//    exChart->addSeries(series0);
+//    exChart->createDefaultAxes();
+//    exChart->legend()->setMarkerShape(QLegend::MarkerShapeFromSeries);
+
+//    QGraphicsScene *exScene = new QGraphicsScene();
+//    exScene->addItem(exChart);
+//    ui->grv1x0->setScene(exScene);
+//    ui->grv1x0->fitInView(ui->grv1x0->sceneRect(), Qt::KeepAspectRatio);
+
+    chartViewMatrix[1][0]->chart()->addSeries(series0);
+    chartViewMatrix[1][0]->chart()->createDefaultAxes();
+    chartViewMatrix[1][0]->chart()->legend()->setMarkerShape(QLegend::MarkerShapeFromSeries);
 
 
 }
 
 void MainWindow::on_actionGo_triggered()
 {
+
+    qsrand(QTime::currentTime().msec());
+
+    std::vector<KCentroid> tmpCentroids;
+
     int32_t nCentroids = this->ui->sbxCentroids->value();
+    bool execute = true;
+    std::uint32_t i;
+
+
 
     if (!(nCentroids >= 2)) {
         QMessageBox::information(this, tr("Numero de Centroides fora do limite"),
@@ -58,17 +138,33 @@ void MainWindow::on_actionGo_triggered()
         return;
     }
 
+
+    if(vctrCentroids.size() > 0 ){
+        vctrCentroids.clear();
+    }
+
     //sorteia os centroids
     KCentroid::newRandomCentroids(vctrCentroids, nCentroids);
 
-    //calcula distancias e define a qual centroide o ponto pertence
-    KCentroid::clusterizeData(vctrCentroids,irisdata);
+    do{
+        //calcula distancias e define a qual centroide o ponto pertence
+        KCentroid::clusterizeData(vctrCentroids,irisdata);
 
-    std::vector<KCentroid> tmpCentroids;
-    tmpCentroids = vctrCentroids;
+        tmpCentroids = vctrCentroids;
 
-    foreach (KCentroid item, vctrCentroids) {
-        item.reCalcCentroid(irisdata);
-    }
+        for (i = 0; i < vctrCentroids.size(); i++) {
+            vctrCentroids[i].reCalcCentroid(irisdata);
+        }
+
+        for ( i = 0; i < vctrCentroids.size() && execute; i++) {
+            execute = ! KCentroid::compareCentroidsPos(vctrCentroids[i],tmpCentroids[i]);
+            // execute é true quando o estado anterior do vetor é diferente do estado atual.
+        }
+
+    }while(execute);
+
+    this->ui->tabs->setEnabled(true);
+    plotAll();
+
     return;
 }
