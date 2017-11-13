@@ -23,8 +23,11 @@ public:
 
     static double euclidianDistance(IrisDataItem iris1, IrisDataItem iris2);
 
+    void clearVector(void);
+
 private:
     std::vector<IrisDataItem> irisVector;
+
 };
 
 #endif // IRISDATA_H
