@@ -27,18 +27,27 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
+    static bool deleteAll(QScatterSeries *element);
 private slots:
     void on_actionOpen_triggered();
 
     void on_actionGo_triggered();
 
+    void on_actionUpdateGraph_triggered();
+
 private:
     Ui::MainWindow *ui;
     IrisData irisdata;
     std::vector<KCentroid> vctrCentroids;
-    QChartView *chartViewMatrix[4][4];
-    void plotAll();
+
+    QChartView *chartView;
+    std::list<QScatterSeries*> scatterList;
+
+    void plotChart();
+    double tmpMethodX(std::int32_t id);
+    double tmpMethodY(std::int32_t id);
+    double tmpMethod(std::int32_t id, QString text);
+
 
 
 };

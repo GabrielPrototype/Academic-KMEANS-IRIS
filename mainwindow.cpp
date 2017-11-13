@@ -12,46 +12,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->tabs->setEnabled(false);
+    ui->graphFrame->setEnabled(false);
 
 
 
-    chartViewMatrix[0][1] = new QChartView();
-    chartViewMatrix[0][2] = new QChartView();
-    chartViewMatrix[0][3] = new QChartView();
+    chartView = new QChartView();
 
-    chartViewMatrix[1][0] = new QChartView();
-
-    chartViewMatrix[1][2] = new QChartView();
-    chartViewMatrix[1][3] = new QChartView();
-
-    chartViewMatrix[2][0] = new QChartView();
-    chartViewMatrix[2][1] = new QChartView();
-
-    chartViewMatrix[2][3] = new QChartView();
-
-    chartViewMatrix[3][0] = new QChartView();
-    chartViewMatrix[3][1] = new QChartView();
-    chartViewMatrix[3][2] = new QChartView();
-
-
-    ui->gridGeralGraph->addWidget(chartViewMatrix[0][1], 0, 3);
-    ui->gridGeralGraph->addWidget(chartViewMatrix[0][2], 0, 4);
-    ui->gridGeralGraph->addWidget(chartViewMatrix[0][3], 0, 5);
-
-    ui->gridGeralGraph->addWidget(chartViewMatrix[1][0], 1, 2);
-
-    ui->gridGeralGraph->addWidget(chartViewMatrix[1][2], 1, 4);
-    ui->gridGeralGraph->addWidget(chartViewMatrix[1][3], 1, 5);
-
-    ui->gridGeralGraph->addWidget(chartViewMatrix[2][0], 2, 2);
-    ui->gridGeralGraph->addWidget(chartViewMatrix[2][1], 2, 3);
-
-    ui->gridGeralGraph->addWidget(chartViewMatrix[2][3], 2, 5);
-
-    ui->gridGeralGraph->addWidget(chartViewMatrix[3][0], 3, 2);
-    ui->gridGeralGraph->addWidget(chartViewMatrix[3][1], 3, 3);
-    ui->gridGeralGraph->addWidget(chartViewMatrix[3][2], 3, 4);
+    ui->gridGraph->addWidget(chartView, 0, 1);
 
 }
 
@@ -83,39 +50,101 @@ void MainWindow::on_actionOpen_triggered()
     }
 
     this->ui->btExec->setEnabled(true);
+    this->ui->btOpen->setEnabled(false);
+
+    this->ui->cmbX->addItems(QStringList()
+                             << tr("SepalLengthCm")
+                             << tr("SepalWidthCm")
+                             << tr("PetalLengthCm")
+                             << tr("PetalWidthCm"));
+    this->ui->cmbY->addItems(QStringList()
+                             << tr("SepalLengthCm")
+                             << tr("SepalWidthCm")
+                             << tr("PetalLengthCm")
+                             << tr("PetalWidthCm"));
+    this->ui->cmbY->setCurrentIndex(1);
     QMessageBox::information(this, tr("Alerta"),
                              "O arquivo foi carregado com sucesso");
     return;
 }
 
-void MainWindow::plotAll(){
+bool MainWindow::deleteAll( QScatterSeries * element )
+{
+    delete element;
+    return true;
+}
 
-    QScatterSeries *series0 = new QScatterSeries();
-    series0->setName("scatter1");
-    series0->setMarkerShape(QScatterSeries::MarkerShapeCircle);
-    series0->setMarkerSize(2.0);
+void MainWindow::plotChart(){
 
-    series0->append(0, 6);
-    series0->append(2, 4);
-    series0->append(3, 8);
-    series0->append(7, 4);
-    series0->append(10, 5);
+    chartView->chart()->removeAllSeries();
+    scatterList.clear();
+
+    delete chartView;
+    chartView = new QChartView();
+
+    ui->gridGraph->addWidget(chartView, 0, 1);
+
+    // execute delete antes de remover o ponteiro, e assim apaga toda a lista.
+    //scatterList.remove_if([](QScatterSeries *element){delete element; return true;});
 
 
-//    QChart *exChart = new QChart();
-//    exChart->addSeries(series0);
-//    exChart->createDefaultAxes();
-//    exChart->legend()->setMarkerShape(QLegend::MarkerShapeFromSeries);
+    foreach (KCentroid item, vctrCentroids) {
+        QScatterSeries *series = new QScatterSeries();
 
-//    QGraphicsScene *exScene = new QGraphicsScene();
-//    exScene->addItem(exChart);
-//    ui->grv1x0->setScene(exScene);
-//    ui->grv1x0->fitInView(ui->grv1x0->sceneRect(), Qt::KeepAspectRatio);
+        series->setName(item.getCntrdPoint().getSpecies());
+        series->setMarkerShape(QScatterSeries::MarkerShapeCircle);
+        series->setMarkerSize(15.0);
 
-    chartViewMatrix[1][0]->chart()->addSeries(series0);
-    chartViewMatrix[1][0]->chart()->createDefaultAxes();
-    chartViewMatrix[1][0]->chart()->legend()->setMarkerShape(QLegend::MarkerShapeFromSeries);
+        foreach (std::int32_t id, item.getClusterIndex()) {
+             series->append(tmpMethodX(id),tmpMethodY(id));
 
+        }
+        scatterList.push_back(series);
+    }
+
+
+    foreach (QScatterSeries *item, scatterList) {
+        chartView->chart()->addSeries(item);
+    }
+
+    chartView->chart()->createDefaultAxes();
+    chartView->chart()->legend()->setMarkerShape(QLegend::MarkerShapeFromSeries);
+
+    this->ui->lbX->setText(this->ui->cmbX->currentText());
+    this->ui->lbY->setText(this->ui->cmbY->currentText());
+
+
+}
+
+double MainWindow::tmpMethodX(int32_t id)
+{
+
+   QString text = this->ui->cmbX->currentText();
+
+   return tmpMethod(id,text);
+
+}
+
+double MainWindow::tmpMethodY(std::int32_t id)
+{
+
+   QString text = this->ui->cmbY->currentText();
+
+   return tmpMethod(id,text);
+
+}
+
+double MainWindow::tmpMethod(int32_t id, QString text)
+{
+
+    if (text == "SepalLengthCm")
+        return  irisdata.getItem(id).getSepalLengthCm();
+    if (text == "SepalWidthCm")
+        return  irisdata.getItem(id).getSepalWidthCm();
+    if (text == "PetalLengthCm")
+        return  irisdata.getItem(id).getPetalLengthCm();
+    if (text ==  "PetalWidthCm")
+        return  irisdata.getItem(id).getPetalWidthCm();
 
 }
 
@@ -142,7 +171,6 @@ void MainWindow::on_actionGo_triggered()
     if(vctrCentroids.size() > 0 ){
         vctrCentroids.clear();
     }
-
     //sorteia os centroids
     KCentroid::newRandomCentroids(vctrCentroids, nCentroids);
 
@@ -163,8 +191,21 @@ void MainWindow::on_actionGo_triggered()
 
     }while(execute);
 
-    this->ui->tabs->setEnabled(true);
-    plotAll();
+    this->ui->graphFrame->setEnabled(true);
+    plotChart();
 
     return;
+}
+
+void MainWindow::on_actionUpdateGraph_triggered()
+{
+    if(this->ui->cmbX->currentText() == this->ui->cmbY->currentText()){
+
+        QMessageBox::information(this, tr("Menssagem"),
+                                 "Um mesmo atributo foi selecionado para ambos os eixos");
+
+        return;
+    }
+
+    plotChart();
 }
