@@ -70,6 +70,11 @@ double IrisData::euclidianDistance(IrisDataItem iris1, IrisDataItem iris2)
     return dist;
 }
 
+void IrisData::clearVector()
+{
+    irisVector.clear();
+}
+
 std::vector<IrisDataItem> IrisData::getIrisVector() const
 {
     return irisVector;
