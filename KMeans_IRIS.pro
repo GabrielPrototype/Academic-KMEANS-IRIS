@@ -41,3 +41,6 @@ FORMS += \
 
 RESOURCES += \
     res/icon_res.qrc
+
+DISTFILES += \
+    .gitignore
