@@ -47,6 +47,10 @@ void MainWindow::plotChart(){
     ui->graphFrame->setHidden(false);
     ui->tabWidget->setEnabled(true);
 
+
+    this->ui->cmbX->setCurrentIndex(0);
+    this->ui->cmbY->setCurrentIndex(1);
+
     chartView->chart()->removeAllSeries();
     scatterList.clear();
 
@@ -80,6 +84,8 @@ void MainWindow::plotChart(){
 
     chartView->chart()->createDefaultAxes();
     chartView->chart()->legend()->setMarkerShape(QLegend::MarkerShapeFromSeries);
+
+
 
     this->ui->lbX->setText(this->ui->cmbX->currentText());
     this->ui->lbY->setText(this->ui->cmbY->currentText());
