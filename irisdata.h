@@ -31,17 +31,16 @@ public:
 
     std::vector<IrisDataItem> getIrisVector() const;
 
-    void replaceItem(const int32_t pos, IrisDataItem &value);
-
-    void replaceList(const std::vector<IrisDataItem> &value);
+    double getAtributeByName(int32_t id, QString text);
 
     void addItem(IrisDataItem &value);
 
     IrisDataItem getItem(std::int32_t id);
 
+    void clearVector(void);
+
     static double euclidianDistance(IrisDataItem iris1, IrisDataItem iris2);
 
-    void clearVector(void);
 
 private:
     std::vector<IrisDataItem> irisVector;

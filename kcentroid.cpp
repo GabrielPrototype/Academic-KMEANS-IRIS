@@ -37,8 +37,6 @@ KCentroid::KCentroid(std::int16_t id)
 }
 
 
-
-
 std::int16_t KCentroid::reCalcCentroid(IrisData &irisData)
 {
     if(clusterIndex.empty())
@@ -65,7 +63,7 @@ std::int16_t KCentroid::reCalcCentroid(IrisData &irisData)
     this->cntrdPoint.setSepalLengthCm(m3/numItens);
     this->cntrdPoint.setSepalWidthCm(m4/numItens);
 
-    return EXIT_SUCCESS;
+    return constants::E_SUCCESS;
 }
 
 void KCentroid::addToClusterIndex(int64_t id)
@@ -111,7 +109,7 @@ std::int16_t KCentroid::clusterizeData(std::vector<KCentroid> &vctrCentroids, Ir
     double nrstDistance;
     double tmpDist;
 
-    for (int i = 0; i < vctrCentroids.size(); i++) {
+    for (std::uint32_t i = 0; i < vctrCentroids.size(); i++) {
         vctrCentroids[i].clearClusterIndex();
     }
 

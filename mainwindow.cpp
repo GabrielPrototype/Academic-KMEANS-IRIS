@@ -67,7 +67,7 @@ void MainWindow::plotChart(){
         series->setMarkerSize(15.0);
 
         foreach (std::int32_t id, item.getClusterIndex()) {
-             series->append(tmpMethodX(id),tmpMethodY(id));
+             series->append(getAtributeByNameXAxis(id),getAtributeByNameYAxis(id));
 
         }
         scatterList.push_back(series);
@@ -104,7 +104,7 @@ void MainWindow::makeTable()
 
     QString tmp = "";
 
-    for (std::int32_t i = 0;  i < vctrCentroids.size(); i++) {
+    for (std::uint32_t i = 0;  i < vctrCentroids.size(); i++) {
 
         count_setosa = 0;
         count_versicolor = 0;
@@ -126,37 +126,25 @@ void MainWindow::makeTable()
 
 }
 
-double MainWindow::tmpMethodX(int32_t id)
+double MainWindow::getAtributeByNameXAxis(int32_t id)
 {
 
    QString text = this->ui->cmbX->currentText();
 
-   return tmpMethod(id,text);
+   return irisdata.getAtributeByName(id,text);
 
 }
 
-double MainWindow::tmpMethodY(std::int32_t id)
+double MainWindow::getAtributeByNameYAxis(std::int32_t id)
 {
 
    QString text = this->ui->cmbY->currentText();
 
-   return tmpMethod(id,text);
+   return irisdata.getAtributeByName(id,text);
 
 }
 
-double MainWindow::tmpMethod(int32_t id, QString text)
-{
 
-    if (text == "SepalLengthCm")
-        return  irisdata.getItem(id).getSepalLengthCm();
-    if (text == "SepalWidthCm")
-        return  irisdata.getItem(id).getSepalWidthCm();
-    if (text == "PetalLengthCm")
-        return  irisdata.getItem(id).getPetalLengthCm();
-    if (text ==  "PetalWidthCm")
-        return  irisdata.getItem(id).getPetalWidthCm();
-
-}
 
 void MainWindow::on_actionOpen_triggered()
 {

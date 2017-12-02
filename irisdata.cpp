@@ -54,19 +54,19 @@ std::int16_t IrisData::loadData(QFile &file){
         delete idt;
 
     }
+
+    return constants::E_SUCCESS;
 }
 
 IrisDataItem IrisData::getItem(std::int32_t id)
 {
-    std::int32_t i;
-
-
-    int debug = irisVector.size();
+    std::uint32_t i;
 
     for( i= 0; i < irisVector.size() && irisVector[i].getId() != id; i++);
 
     if(i < irisVector.size())
         return irisVector[i];
+
 
 }
 
@@ -97,19 +97,22 @@ std::vector<IrisDataItem> IrisData::getIrisVector() const
     return irisVector;
 }
 
-void IrisData::replaceItem(int32_t pos, IrisDataItem &value)
+double IrisData::getAtributeByName(int32_t id, QString text)
 {
-    if(pos < irisVector.size() && pos >= 0)
-        irisVector.insert(irisVector.begin(),value);
+    if (text == "SepalLengthCm")
+        return  this->getItem(id).getSepalLengthCm();
+    if (text == "SepalWidthCm")
+        return  this->getItem(id).getSepalWidthCm();
+    if (text == "PetalLengthCm")
+        return  this->getItem(id).getPetalLengthCm();
+    if (text ==  "PetalWidthCm")
+        return  this->getItem(id).getPetalWidthCm();
+
+    return 0;
 }
 
 void IrisData::addItem(IrisDataItem &value){
 
     irisVector.push_back(value);
 
-}
-
-void IrisData::replaceList(const std::vector<IrisDataItem> &value)
-{
-    irisVector = value;
 }

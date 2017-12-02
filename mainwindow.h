@@ -47,6 +47,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     static bool deleteAll(QScatterSeries *element);
+
+
 private slots:
     void on_actionOpen_triggered();
 
@@ -64,10 +66,8 @@ private:
 
     void plotChart();
     void makeTable();
-    double tmpMethodX(std::int32_t id);
-    double tmpMethodY(std::int32_t id);
-    double tmpMethod(std::int32_t id, QString text);
-
+    double getAtributeByNameXAxis(std::int32_t id);
+    double getAtributeByNameYAxis(std::int32_t id);
 
 
 };
