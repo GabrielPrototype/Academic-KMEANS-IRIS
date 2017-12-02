@@ -21,6 +21,7 @@
 #include <QTextStream>
 #include <irisdataitem.h>
 #include <cmath>
+#include "constants.h"
 
 class IrisData
 {

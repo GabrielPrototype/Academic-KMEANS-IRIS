@@ -50,7 +50,8 @@ HEADERS += \
         mainwindow.h \
     irisdata.h \
     irisdataitem.h \
-    kcentroid.h
+    kcentroid.h \
+    constants.h
 
 FORMS += \
         mainwindow.ui

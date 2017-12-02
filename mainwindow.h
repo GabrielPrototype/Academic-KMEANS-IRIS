@@ -26,10 +26,12 @@
 #include <QtCharts/QChart>
 #include <QtCharts/QChartView>
 #include <QScatterSeries>
-
+#include <QStandardItemModel>
 
 #include <irisdata.h>
 #include <kcentroid.h>
+#include "constants.h"
+
 
 using namespace QtCharts;
 
@@ -61,6 +63,7 @@ private:
     std::list<QScatterSeries*> scatterList;
 
     void plotChart();
+    void makeTable();
     double tmpMethodX(std::int32_t id);
     double tmpMethodY(std::int32_t id);
     double tmpMethod(std::int32_t id, QString text);

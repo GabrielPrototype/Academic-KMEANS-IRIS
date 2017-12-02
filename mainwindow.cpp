@@ -24,59 +24,15 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->graphFrame->setEnabled(false);
-
-
-
+    ui->graphFrame->setHidden(true);
+    ui->tabWidget->setEnabled(false);
     chartView = new QChartView();
-
-    ui->gridGraph->addWidget(chartView, 0, 1);
 
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-}
-
-
-
-void MainWindow::on_actionOpen_triggered()
-{
-    QString fileName = QFileDialog::getOpenFileName(this,
-                                                    tr("Selecionar base de dados"), "",
-                                                    tr("All Files (*)"));
-    if (fileName.isEmpty())
-        return;
-
-    QFile file(fileName);
-    if (!file.open(QIODevice::ReadOnly)) {
-        QMessageBox::information(this, tr("Falha ao abrir arquivo"),
-                                 file.errorString());
-        return;
-    }
-    if(!irisdata.loadData(file)){
-        QMessageBox::information(this, tr("Falha ao carregar arquivo"),
-                                 "Houve um problema ao carregar o arquivo");
-        return;
-    }
-
-    this->ui->btExec->setEnabled(true);
-    this->ui->btOpen->setEnabled(false);
-
-    this->ui->cmbX->addItems(QStringList()
-                             << tr("SepalLengthCm")
-                             << tr("SepalWidthCm")
-                             << tr("PetalLengthCm")
-                             << tr("PetalWidthCm"));
-    this->ui->cmbY->addItems(QStringList()
-                             << tr("SepalLengthCm")
-                             << tr("SepalWidthCm")
-                             << tr("PetalLengthCm")
-                             << tr("PetalWidthCm"));
-    this->ui->cmbY->setCurrentIndex(1);
-    QMessageBox::information(this, tr("Alerta"),
-                             "O arquivo foi carregado com sucesso");
-    return;
 }
 
 bool MainWindow::deleteAll( QScatterSeries * element )
@@ -86,6 +42,10 @@ bool MainWindow::deleteAll( QScatterSeries * element )
 }
 
 void MainWindow::plotChart(){
+
+    ui->graphFrame->setEnabled(true);
+    ui->graphFrame->setHidden(false);
+    ui->tabWidget->setEnabled(true);
 
     chartView->chart()->removeAllSeries();
     scatterList.clear();
@@ -127,6 +87,45 @@ void MainWindow::plotChart(){
 
 }
 
+void MainWindow::makeTable()
+{
+
+    ui->tableMatrix->clear();
+    QStringList horzHeaders;
+    horzHeaders << "Iris Setosa" << "Iris Versicolor" << "Iris Virginica";
+    ui->tableMatrix->setRowCount(3);
+    ui->tableMatrix->setColumnCount(vctrCentroids.size());
+    ui->tableMatrix->setVerticalHeaderLabels( horzHeaders );
+
+
+    std::int32_t count_setosa;
+    std::int32_t count_versicolor;
+    std::int32_t count_virginica;
+
+    QString tmp = "";
+
+    for (std::int32_t i = 0;  i < vctrCentroids.size(); i++) {
+
+        count_setosa = 0;
+        count_versicolor = 0;
+        count_virginica = 0;
+
+        foreach (std::int32_t id, vctrCentroids[i].getClusterIndex()) {
+
+            tmp = irisdata.getItem(id).getSpecies();
+
+            if (tmp == "Iris-setosa") count_setosa++;
+            else if (tmp == "Iris-versicolor") count_versicolor++;
+            else if (tmp == "Iris-virginica") count_virginica++;
+        }
+
+        ui->tableMatrix->setItem(0,i,new QTableWidgetItem(QString::number(count_setosa)));
+        ui->tableMatrix->setItem(1,i,new QTableWidgetItem(QString::number(count_versicolor)));
+        ui->tableMatrix->setItem(2,i,new QTableWidgetItem(QString::number(count_virginica)));
+    }
+
+}
+
 double MainWindow::tmpMethodX(int32_t id)
 {
 
@@ -159,9 +158,47 @@ double MainWindow::tmpMethod(int32_t id, QString text)
 
 }
 
+void MainWindow::on_actionOpen_triggered()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+                                                    tr("Selecionar base de dados"), "",
+                                                    tr("All Files (*)"));
+    if (fileName.isEmpty())
+        return;
+
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly)) {
+        QMessageBox::information(this, tr("Falha ao abrir arquivo"),
+                                 file.errorString());
+        return;
+    }
+    if(!irisdata.loadData(file)){
+        QMessageBox::information(this, tr("Falha ao carregar arquivo"),
+                                 "Houve um problema ao carregar o arquivo");
+        return;
+    }
+
+    this->ui->btExec->setEnabled(true);
+    this->ui->btOpen->setEnabled(false);
+
+    this->ui->cmbX->addItems(QStringList()
+                             << tr("SepalLengthCm")
+                             << tr("SepalWidthCm")
+                             << tr("PetalLengthCm")
+                             << tr("PetalWidthCm"));
+    this->ui->cmbY->addItems(QStringList()
+                             << tr("SepalLengthCm")
+                             << tr("SepalWidthCm")
+                             << tr("PetalLengthCm")
+                             << tr("PetalWidthCm"));
+    this->ui->cmbY->setCurrentIndex(1);
+    QMessageBox::information(this, tr("Alerta"),
+                             "O arquivo foi carregado com sucesso");
+    return;
+}
+
 void MainWindow::on_actionGo_triggered()
 {
-
     qsrand(QTime::currentTime().msec());
 
     std::vector<KCentroid> tmpCentroids;
@@ -169,7 +206,6 @@ void MainWindow::on_actionGo_triggered()
     int32_t nCentroids = this->ui->sbxCentroids->value();
     bool execute = true;
     std::uint32_t i;
-
 
 
     if (!(nCentroids >= 2)) {
@@ -204,7 +240,7 @@ void MainWindow::on_actionGo_triggered()
 
     this->ui->graphFrame->setEnabled(true);
     plotChart();
-
+    makeTable();
     return;
 }
 

@@ -19,7 +19,7 @@
 #define IRISDATAITEM_H
 
 #include <QString>
-
+#include "constants.h"
 
 
 class IrisDataItem

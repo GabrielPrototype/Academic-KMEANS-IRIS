@@ -18,6 +18,7 @@
 #ifndef KCENTROID_H
 #define KCENTROID_H
 #include "irisdata.h"
+#include "constants.h"
 
 class KCentroid
 {
